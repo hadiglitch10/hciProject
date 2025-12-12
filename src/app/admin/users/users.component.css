@@ -1,20 +1,21 @@
+/* Local overrides */
 .form-field {
-  max-width: 380px;
-}
-
-table button {
-  margin-right: 6px;
+  max-width: 400px;
 }
 
 .table-actions {
   display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 8px;
 }
 
+/* Specific badge for roles */
 .role-pill {
-  background: #0f172a0d;
-  border: 1px solid #e2e8f0;
-  color: #0f172a;
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
 }
-
