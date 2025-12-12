@@ -1,0 +1,68 @@
+<section class="card">
+  <h2>{{ editMode ? 'Edit Course' : 'Add Course' }}</h2>
+  <form [formGroup]="courseForm" (ngSubmit)="submit()">
+    <div class="course-form-grid">
+      <div class="form-field">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" />
+        <small class="muted" *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched">
+          Title is required.
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="instructor">Instructor</label>
+        <input id="instructor" type="text" formControlName="instructor" />
+      </div>
+
+      <div class="form-field">
+        <label for="startDate">Start Date</label>
+        <input id="startDate" type="date" formControlName="startDate" />
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="description">Description</label>
+      <textarea id="description" rows="4" formControlName="description"></textarea>
+      <small class="muted" *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+        Description is required (min 10 chars).
+      </small>
+    </div>
+
+    <button class="btn" type="submit">{{ editMode ? 'Save Changes' : 'Add Course' }}</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Courses</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Instructor</th>
+        <th>Start Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses$ | async">
+        <td>{{ course.title }}</td>
+        <td>{{ course.instructor }}</td>
+        <td>{{ course.startDate | date }}</td>
+        <td [ngSwitch]="course.archived">
+          <span class="status" [ngClass]="course.archived ? 'deactivated' : 'approved'">
+            <ng-container *ngSwitchCase="true">Archived</ng-container>
+            <ng-container *ngSwitchDefault>Active</ng-container>
+          </span>
+        </td>
+        <td>
+          <a class="btn secondary" [routerLink]="['/admin/courses', course.id]">Edit</a>
+          <button class="btn danger" (click)="archive(course)" [disabled]="course.archived">Archive</button>
+          <a class="btn secondary" [routerLink]="['/admin/assign', course.id]">Assign</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+

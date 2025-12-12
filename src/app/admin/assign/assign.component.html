@@ -1,0 +1,25 @@
+<section class="card" *ngIf="course; else noCourse">
+  <h2>Assign Students to {{ course?.title }}</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div formArrayName="students">
+      <div class="student-row" *ngFor="let student of students; let i = index">
+        <label [formControlName]="i">
+          <input type="checkbox" />
+          {{ student.name }} ({{ student.email }})
+        </label>
+      </div>
+    </div>
+    <button class="btn" type="submit">Save Assignments</button>
+  </form>
+
+  <p class="muted" *ngIf="course?.assignedStudentIds?.length">
+    Assigned IDs: {{ course?.assignedStudentIds.join(', ') }}
+  </p>
+</section>
+
+<ng-template #noCourse>
+  <section class="card">
+    <p>No course found for this assignment.</p>
+  </section>
+</ng-template>
+

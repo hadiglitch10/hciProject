@@ -1,0 +1,15 @@
+.card + .card {
+  margin-top: 14px;
+}
+
+table a,
+table button {
+  margin-right: 6px;
+}
+
+.course-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px 16px;
+}
+

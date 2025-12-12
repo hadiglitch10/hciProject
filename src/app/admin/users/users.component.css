@@ -1,0 +1,20 @@
+.form-field {
+  max-width: 380px;
+}
+
+table button {
+  margin-right: 6px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.role-pill {
+  background: #0f172a0d;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+

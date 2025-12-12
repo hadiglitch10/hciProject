@@ -1,0 +1,40 @@
+<section class="card">
+  <h2>Users</h2>
+
+  <div class="form-field">
+    <label for="filter">Filter by name or email</label>
+    <input id="filter" type="text" [formControl]="filterControl" placeholder="Search users..." />
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers$ | async">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td><span class="pill role-pill">{{ user.role | titlecase }}</span></td>
+        <td>
+          <span class="status" [ngClass]="statusClass(user.status)">
+            {{ user.status | titlecase }}
+          </span>
+        </td>
+        <td>
+          <div class="table-actions">
+            <button class="btn" (click)="approve(user)" [disabled]="user.status === 'approved'">Approve</button>
+            <button class="btn secondary" (click)="deactivate(user)" [disabled]="user.status === 'deactivated'">Deactivate</button>
+            <button class="btn danger" (click)="delete(user)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
